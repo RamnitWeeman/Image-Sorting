@@ -115,6 +115,41 @@ for image_file in image_files:
             #Moves images to the destinationfolder, based on the dates
             shutil.move(image_file, destination_folder)
 
+
+
+#Creates a list of all the folders placed in your folder
+sub_folders = [name for name in os.listdir(img_dir) if os.path.isdir(os.path.join(img_dir, name))]
+
+# Looks through all ther folder names in the directory
+for a in range(len(sub_folders)):
+
+    #Conditions that if index 4 and 7 boths contains a line, we want to do something
+    if sub_folders[a][4] == "-" and sub_folders[a][7] == "-":
+
+        while True:
+            #Let us put in either y or n to decide if we want to change the name of that specific folder
+            question = input(f"Do you want to change the name of the following folder? {sub_folders[a]}. Pick y for yes, and n for no: " ).lower()
+
+            # If we answer n, it says pass and moves on to the next folder
+            if question == "n":
+                break
+
+            # If we say y we get to type in a new name
+            elif question == "y":
+                new_name = input("Which name do you want the folder to have?: ")
+
+                #This takes the original file path, and renames it into the new one, defined on the line above
+                os.rename(os.path.join(img_dir, sub_folders[a]), os.path.join(img_dir, new_name))
+
+                break
+
+            elif question != "y" and question != "n":
+                print("You did not pick any of the given options, please try again")    
+    else:
+        break
+            
+
+
             
             
 
